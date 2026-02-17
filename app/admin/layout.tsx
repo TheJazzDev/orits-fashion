@@ -51,12 +51,12 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-stone-50">
+    <div className="flex h-screen overflow-hidden bg-stone-50">
       <AdminSidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
-      <div className="flex-1 overflow-auto min-w-0">
+      <div className="flex-1 overflow-y-auto min-w-0">
         {/* Mobile Top Bar */}
         <div className="sticky top-0 z-30 bg-white border-b border-stone-200 px-4 py-3 flex items-center gap-3 md:hidden">
           <button

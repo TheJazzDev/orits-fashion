@@ -43,7 +43,7 @@ export default function AdminSidebar({
       )}
 
       <aside
-        className={`fixed top-0 left-0 z-50 w-64 bg-stone-900 text-stone-300 h-full flex flex-col shrink-0 transition-transform duration-200 ease-out md:relative md:translate-x-0 ${
+        className={`fixed top-0 left-0 z-50 w-64 bg-stone-900 text-stone-300 h-full flex flex-col shrink-0 transition-transform duration-200 ease-out md:sticky md:top-0 md:h-screen md:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
