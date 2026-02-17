@@ -66,24 +66,22 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-stone-900 px-4">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,149,28,0.1),_transparent_50%)]" />
-
       <div className="w-full max-w-md relative z-10">
-        <div className="text-center mb-10">
-          <h1 className="font-heading text-4xl text-white mb-2">
+        <div className="text-center mb-8 md:mb-10">
+          <h1 className="font-heading text-3xl md:text-4xl text-white mb-2">
             Orit&apos;s Fashion
           </h1>
-          <div className="w-12 h-[1px] bg-gold-500 mx-auto mb-4" />
+          <div className="w-12 h-[1px] bg-gold-500 mx-auto mb-3 md:mb-4" />
           <p className="text-stone-400 text-sm">
             {isSetup ? "Create your admin account" : "Admin Panel"}
           </p>
         </div>
 
-        <div className="bg-white p-8">
+        <div className="bg-white p-6 md:p-8">
           {isSetup ? (
-            <form onSubmit={handleSetup} className="space-y-5">
+            <form onSubmit={handleSetup} className="space-y-4 md:space-y-5">
               <div>
-                <label className="block text-xs tracking-[0.1em] uppercase text-stone-500 mb-2">
+                <label className="block text-xs tracking-widest uppercase text-stone-500 mb-1.5 md:mb-2">
                   Full Name
                 </label>
                 <input
@@ -97,7 +95,7 @@ export default function AdminLoginPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs tracking-[0.1em] uppercase text-stone-500 mb-2">
+                <label className="block text-xs tracking-widest uppercase text-stone-500 mb-1.5 md:mb-2">
                   Email
                 </label>
                 <input
@@ -111,7 +109,7 @@ export default function AdminLoginPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs tracking-[0.1em] uppercase text-stone-500 mb-2">
+                <label className="block text-xs tracking-widest uppercase text-stone-500 mb-1.5 md:mb-2">
                   Password
                 </label>
                 <input
@@ -128,22 +126,22 @@ export default function AdminLoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-gold-500 hover:bg-gold-600 text-white text-sm tracking-[0.15em] uppercase font-medium disabled:opacity-50 transition-colors"
+                className="w-full py-3 bg-gold-500 text-white text-sm tracking-[0.15em] uppercase font-medium disabled:opacity-50 active:bg-gold-600 transition-colors"
               >
                 {loading ? "Creating..." : "Create Account"}
               </button>
               <button
                 type="button"
                 onClick={() => setIsSetup(false)}
-                className="w-full text-center text-sm text-stone-400 hover:text-stone-600 transition-colors"
+                className="w-full text-center text-sm text-stone-400 active:text-stone-600 transition-colors py-1"
               >
                 Already have an account? Sign in
               </button>
             </form>
           ) : (
-            <form onSubmit={handleLogin} className="space-y-5">
+            <form onSubmit={handleLogin} className="space-y-4 md:space-y-5">
               <div>
-                <label className="block text-xs tracking-[0.1em] uppercase text-stone-500 mb-2">
+                <label className="block text-xs tracking-widest uppercase text-stone-500 mb-1.5 md:mb-2">
                   Email
                 </label>
                 <input
@@ -157,7 +155,7 @@ export default function AdminLoginPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs tracking-[0.1em] uppercase text-stone-500 mb-2">
+                <label className="block text-xs tracking-widest uppercase text-stone-500 mb-1.5 md:mb-2">
                   Password
                 </label>
                 <input
@@ -173,14 +171,14 @@ export default function AdminLoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-stone-900 hover:bg-stone-800 text-white text-sm tracking-[0.15em] uppercase font-medium disabled:opacity-50 transition-colors"
+                className="w-full py-3 bg-stone-900 text-white text-sm tracking-[0.15em] uppercase font-medium disabled:opacity-50 active:bg-stone-700 transition-colors"
               >
                 {loading ? "Signing in..." : "Sign In"}
               </button>
               <button
                 type="button"
                 onClick={() => setIsSetup(true)}
-                className="w-full text-center text-sm text-stone-400 hover:text-stone-600 transition-colors"
+                className="w-full text-center text-sm text-stone-400 active:text-stone-600 transition-colors py-1"
               >
                 First time? Create admin account
               </button>
