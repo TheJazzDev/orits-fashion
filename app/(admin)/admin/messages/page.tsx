@@ -70,16 +70,16 @@ export default function AdminMessagesPage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-stone-900">Messages</h1>
-        <p className="text-stone-500 text-sm mt-1">
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-xl md:text-2xl font-semibold text-stone-900">Messages</h1>
+        <p className="text-stone-500 text-xs md:text-sm mt-1">
           Contact form submissions ({messages.filter((m) => !m.read).length}{" "}
           unread)
         </p>
       </div>
 
       {loading ? (
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           {[1, 2, 3].map((i) => (
             <div
               key={i}
@@ -88,17 +88,17 @@ export default function AdminMessagesPage() {
           ))}
         </div>
       ) : messages.length === 0 ? (
-        <div className="text-center py-20 bg-white border border-stone-200">
-          <Mail size={48} className="mx-auto text-stone-300 mb-4" />
-          <h3 className="text-lg font-medium text-stone-900 mb-2">
+        <div className="text-center py-16 md:py-20 bg-white border border-stone-200">
+          <Mail size={40} className="mx-auto text-stone-300 mb-4" />
+          <h3 className="text-base md:text-lg font-medium text-stone-900 mb-2">
             No messages yet
           </h3>
-          <p className="text-stone-500 text-sm">
+          <p className="text-stone-500 text-xs md:text-sm">
             Messages from your contact form will appear here.
           </p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-2 md:space-y-3">
           {messages.map((msg) => (
             <div
               key={msg.id}
@@ -109,34 +109,32 @@ export default function AdminMessagesPage() {
               }`}
             >
               <div
-                className="p-4 cursor-pointer hover:bg-stone-50 transition-colors"
+                className="p-3 md:p-4 cursor-pointer active:bg-stone-50 transition-colors"
                 onClick={() =>
                   setExpanded(expanded === msg.id ? null : msg.id)
                 }
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    {!msg.read && (
-                      <div className="w-2 h-2 bg-gold-500 rounded-full shrink-0" />
-                    )}
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span
-                          className={`text-sm ${!msg.read ? "font-semibold text-stone-900" : "text-stone-700"}`}
-                        >
-                          {msg.name}
-                        </span>
-                        {msg.subject && (
-                          <span className="text-xs text-stone-400">
-                            — {msg.subject}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-stone-400">{msg.email}</p>
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      {!msg.read && (
+                        <div className="w-2 h-2 bg-gold-500 rounded-full shrink-0" />
+                      )}
+                      <span
+                        className={`text-sm truncate ${!msg.read ? "font-semibold text-stone-900" : "text-stone-700"}`}
+                      >
+                        {msg.name}
+                      </span>
                     </div>
+                    {msg.subject && (
+                      <p className="text-xs text-stone-500 mt-0.5 truncate">
+                        {msg.subject}
+                      </p>
+                    )}
+                    <p className="text-xs text-stone-400 mt-0.5">{msg.email}</p>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-stone-400">
+                  <div className="flex items-center gap-1 shrink-0">
+                    <span className="text-[10px] md:text-xs text-stone-400">
                       {new Date(msg.createdAt).toLocaleDateString("en-NG", {
                         month: "short",
                         day: "numeric",
@@ -147,7 +145,7 @@ export default function AdminMessagesPage() {
                         e.stopPropagation();
                         toggleRead(msg.id, msg.read);
                       }}
-                      className="p-1.5 text-stone-400 hover:text-stone-600 transition-colors"
+                      className="p-1.5 md:p-2 text-stone-400 active:text-stone-600 transition-colors"
                       title={msg.read ? "Mark as unread" : "Mark as read"}
                     >
                       {msg.read ? (
@@ -161,7 +159,7 @@ export default function AdminMessagesPage() {
                         e.stopPropagation();
                         deleteMessage(msg.id);
                       }}
-                      className="p-1.5 text-stone-400 hover:text-red-500 transition-colors"
+                      className="p-1.5 md:p-2 text-stone-400 active:text-red-500 transition-colors"
                       title="Delete"
                     >
                       <Trash2 size={16} />
@@ -171,13 +169,13 @@ export default function AdminMessagesPage() {
               </div>
 
               {expanded === msg.id && (
-                <div className="px-4 pb-4 pt-2 border-t border-stone-100">
+                <div className="px-3 md:px-4 pb-3 md:pb-4 pt-2 border-t border-stone-100">
                   {msg.phone && (
                     <p className="text-xs text-stone-500 mb-2">
                       Phone: {msg.phone}
                     </p>
                   )}
-                  <p className="text-sm text-stone-700 whitespace-pre-wrap leading-relaxed">
+                  <p className="text-xs md:text-sm text-stone-700 whitespace-pre-wrap leading-relaxed">
                     {msg.message}
                   </p>
                 </div>

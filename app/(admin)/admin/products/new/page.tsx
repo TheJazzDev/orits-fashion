@@ -120,28 +120,28 @@ export default function NewProductPage() {
 
   return (
     <div>
-      <div className="mb-8">
+      <div className="mb-6 md:mb-8">
         <Link
           href="/admin/products"
-          className="flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700 transition-colors mb-4"
+          className="flex items-center gap-1 text-sm text-stone-500 active:text-stone-700 transition-colors mb-3 md:mb-4"
         >
           <ArrowLeft size={16} />
           Back to Products
         </Link>
-        <h1 className="text-2xl font-semibold text-stone-900">
+        <h1 className="text-xl md:text-2xl font-semibold text-stone-900">
           {editId ? "Edit Product" : "New Product"}
         </h1>
       </div>
 
-      <form onSubmit={handleSubmit} className="max-w-3xl space-y-8">
-        <div className="bg-white border border-stone-200 p-6 space-y-6">
+      <form onSubmit={handleSubmit} className="max-w-3xl space-y-6 md:space-y-8">
+        <div className="bg-white border border-stone-200 p-4 md:p-6 space-y-4 md:space-y-6">
           <h2 className="text-sm font-medium text-stone-900 uppercase tracking-wider">
             Basic Information
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             <div>
-              <label className="block text-xs text-stone-500 mb-2">
+              <label className="block text-xs text-stone-500 mb-1.5 md:mb-2">
                 Product Name *
               </label>
               <input
@@ -150,23 +150,23 @@ export default function NewProductPage() {
                 required
                 value={form.name}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors"
+                className="w-full px-3 md:px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors"
               />
             </div>
             <div>
-              <label className="block text-xs text-stone-500 mb-2">Slug</label>
+              <label className="block text-xs text-stone-500 mb-1.5 md:mb-2">Slug</label>
               <input
                 type="text"
                 name="slug"
                 value={form.slug}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors bg-stone-50"
+                className="w-full px-3 md:px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors bg-stone-50"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs text-stone-500 mb-2">
+            <label className="block text-xs text-stone-500 mb-1.5 md:mb-2">
               Description
             </label>
             <textarea
@@ -174,13 +174,13 @@ export default function NewProductPage() {
               rows={4}
               value={form.description}
               onChange={handleChange}
-              className="w-full px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors resize-none"
+              className="w-full px-3 md:px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors resize-none"
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             <div>
-              <label className="block text-xs text-stone-500 mb-2">
+              <label className="block text-xs text-stone-500 mb-1.5 md:mb-2">
                 Price (NGN)
               </label>
               <input
@@ -189,19 +189,19 @@ export default function NewProductPage() {
                 step="0.01"
                 value={form.price}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors"
+                className="w-full px-3 md:px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors"
                 placeholder="0.00"
               />
             </div>
             <div>
-              <label className="block text-xs text-stone-500 mb-2">
+              <label className="block text-xs text-stone-500 mb-1.5 md:mb-2">
                 Category
               </label>
               <select
                 name="categoryId"
                 value={form.categoryId}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors bg-white"
+                className="w-full px-3 md:px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors bg-white"
               >
                 <option value="">No category</option>
                 {categories.map((cat) => (
@@ -220,7 +220,7 @@ export default function NewProductPage() {
                 name="featured"
                 checked={form.featured}
                 onChange={handleChange}
-                className="w-4 h-4 accent-gold-500"
+                className="w-5 h-5 accent-gold-500"
               />
               <span className="text-sm text-stone-700">Featured</span>
             </label>
@@ -230,25 +230,25 @@ export default function NewProductPage() {
                 name="published"
                 checked={form.published}
                 onChange={handleChange}
-                className="w-4 h-4 accent-gold-500"
+                className="w-5 h-5 accent-gold-500"
               />
               <span className="text-sm text-stone-700">Published</span>
             </label>
           </div>
         </div>
 
-        <div className="bg-white border border-stone-200 p-6 space-y-4">
+        <div className="bg-white border border-stone-200 p-4 md:p-6 space-y-4">
           <h2 className="text-sm font-medium text-stone-900 uppercase tracking-wider">
             Product Images
           </h2>
           <ImageUpload images={images} onChange={setImages} />
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex gap-3 md:gap-4">
           <button
             type="submit"
             disabled={loading}
-            className="px-8 py-3 bg-stone-900 text-white text-sm hover:bg-stone-800 disabled:opacity-50 transition-colors"
+            className="flex-1 sm:flex-none px-6 md:px-8 py-3 bg-stone-900 text-white text-sm active:bg-stone-700 disabled:opacity-50 transition-colors"
           >
             {loading
               ? "Saving..."
@@ -258,7 +258,7 @@ export default function NewProductPage() {
           </button>
           <Link
             href="/admin/products"
-            className="px-8 py-3 border border-stone-300 text-stone-600 text-sm hover:bg-stone-50 transition-colors"
+            className="flex-1 sm:flex-none px-6 md:px-8 py-3 border border-stone-300 text-stone-600 text-sm text-center active:bg-stone-50 transition-colors"
           >
             Cancel
           </Link>

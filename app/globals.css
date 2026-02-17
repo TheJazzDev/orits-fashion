@@ -20,6 +20,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -30,19 +31,42 @@ body {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
+/* Prevent iOS zoom on input focus */
+input,
+select,
+textarea {
+  font-size: 16px;
 }
 
-::-webkit-scrollbar-track {
-  background: #f5f5f4;
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background: #d6d3d1;
-  border-radius: 3px;
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out both;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #a8a29e;
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-overlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
