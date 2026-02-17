@@ -131,10 +131,10 @@ export default function AdminCategoriesPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between mb-6 md:mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-stone-900">Categories</h1>
-          <p className="text-stone-500 text-sm mt-1">
+          <h1 className="text-xl md:text-2xl font-semibold text-stone-900">Categories</h1>
+          <p className="text-stone-500 text-xs md:text-sm mt-1">
             Organize your products into collections
           </p>
         </div>
@@ -143,22 +143,23 @@ export default function AdminCategoriesPage() {
             resetForm();
             setShowForm(true);
           }}
-          className="flex items-center gap-2 px-4 py-2.5 bg-stone-900 text-white text-sm hover:bg-stone-800 transition-colors"
+          className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-stone-900 text-white text-xs md:text-sm active:bg-stone-700 transition-colors"
         >
-          <Plus size={16} />
-          Add Category
+          <Plus size={14} />
+          <span className="hidden sm:inline">Add Category</span>
+          <span className="sm:hidden">Add</span>
         </button>
       </div>
 
       {showForm && (
-        <div className="bg-white border border-stone-200 p-6 mb-8">
-          <div className="flex items-center justify-between mb-6">
+        <div className="bg-white border border-stone-200 p-4 md:p-6 mb-6 md:mb-8">
+          <div className="flex items-center justify-between mb-4 md:mb-6">
             <h2 className="text-sm font-medium text-stone-900 uppercase tracking-wider">
               {editingId ? "Edit Category" : "New Category"}
             </h2>
             <button
               onClick={resetForm}
-              className="text-stone-400 hover:text-stone-600"
+              className="text-stone-400 active:text-stone-600 p-1"
             >
               <X size={18} />
             </button>
@@ -175,7 +176,7 @@ export default function AdminCategoriesPage() {
                   required
                   value={form.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors"
+                  className="w-full px-3 md:px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors"
                 />
               </div>
               <div>
@@ -187,7 +188,7 @@ export default function AdminCategoriesPage() {
                   name="slug"
                   value={form.slug}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors bg-stone-50"
+                  className="w-full px-3 md:px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors bg-stone-50"
                 />
               </div>
             </div>
@@ -200,7 +201,7 @@ export default function AdminCategoriesPage() {
                 rows={2}
                 value={form.description}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors resize-none"
+                className="w-full px-3 md:px-4 py-2.5 border border-stone-200 text-sm focus:border-gold-500 focus:outline-none transition-colors resize-none"
               />
             </div>
             <div>
@@ -217,7 +218,7 @@ export default function AdminCategoriesPage() {
               <button
                 type="submit"
                 disabled={saving}
-                className="px-6 py-2.5 bg-stone-900 text-white text-sm hover:bg-stone-800 disabled:opacity-50 transition-colors"
+                className="px-5 md:px-6 py-2.5 bg-stone-900 text-white text-sm active:bg-stone-700 disabled:opacity-50 transition-colors"
               >
                 {saving
                   ? "Saving..."
@@ -228,7 +229,7 @@ export default function AdminCategoriesPage() {
               <button
                 type="button"
                 onClick={resetForm}
-                className="px-6 py-2.5 border border-stone-300 text-stone-600 text-sm hover:bg-stone-50 transition-colors"
+                className="px-5 md:px-6 py-2.5 border border-stone-300 text-stone-600 text-sm active:bg-stone-50 transition-colors"
               >
                 Cancel
               </button>
@@ -238,7 +239,7 @@ export default function AdminCategoriesPage() {
       )}
 
       {loading ? (
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           {[1, 2, 3].map((i) => (
             <div
               key={i}
@@ -247,76 +248,124 @@ export default function AdminCategoriesPage() {
           ))}
         </div>
       ) : categories.length === 0 ? (
-        <div className="text-center py-20 bg-white border border-stone-200">
-          <h3 className="text-lg font-medium text-stone-900 mb-2">
+        <div className="text-center py-16 md:py-20 bg-white border border-stone-200">
+          <h3 className="text-base md:text-lg font-medium text-stone-900 mb-2">
             No categories yet
           </h3>
-          <p className="text-stone-500 text-sm">
+          <p className="text-stone-500 text-xs md:text-sm">
             Create categories to organize your products.
           </p>
         </div>
       ) : (
-        <div className="bg-white border border-stone-200 overflow-hidden">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-stone-100 bg-stone-50">
-                <th className="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
-                  Category
-                </th>
-                <th className="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
-                  Slug
-                </th>
-                <th className="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
-                  Products
-                </th>
-                <th className="text-right text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-stone-100">
-              {categories.map((category) => (
-                <tr key={category.id} className="hover:bg-stone-50">
-                  <td className="px-6 py-4">
+        <div className="space-y-2 md:space-y-0">
+          {/* Mobile Card Layout */}
+          <div className="md:hidden space-y-2">
+            {categories.map((category) => (
+              <div
+                key={category.id}
+                className="bg-white border border-stone-200 p-3"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-stone-900">
                       {category.name}
                     </p>
                     {category.description && (
-                      <p className="text-xs text-stone-400 mt-0.5">
+                      <p className="text-xs text-stone-400 mt-0.5 line-clamp-1">
                         {category.description}
                       </p>
                     )}
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="text-sm text-stone-500">
-                      {category.slug}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="text-sm text-stone-500">
-                      {category._count?.products ?? 0}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center justify-end gap-2">
-                      <button
-                        onClick={() => startEdit(category)}
-                        className="p-1.5 text-stone-400 hover:text-stone-600 transition-colors"
-                      >
-                        <Pencil size={16} />
-                      </button>
-                      <button
-                        onClick={() => deleteCategory(category.id)}
-                        className="p-1.5 text-stone-400 hover:text-red-500 transition-colors"
-                      >
-                        <Trash2 size={16} />
-                      </button>
+                    <div className="flex items-center gap-3 mt-1.5">
+                      <span className="text-xs text-stone-400">
+                        /{category.slug}
+                      </span>
+                      <span className="text-xs text-stone-500">
+                        {category._count?.products ?? 0} products
+                      </span>
                     </div>
-                  </td>
+                  </div>
+                  <div className="flex items-center gap-1 ml-2">
+                    <button
+                      onClick={() => startEdit(category)}
+                      className="p-2 text-stone-400 active:text-stone-600"
+                    >
+                      <Pencil size={16} />
+                    </button>
+                    <button
+                      onClick={() => deleteCategory(category.id)}
+                      className="p-2 text-stone-400 active:text-red-500"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Table */}
+          <div className="hidden md:block bg-white border border-stone-200 overflow-hidden">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-stone-100 bg-stone-50">
+                  <th className="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
+                    Category
+                  </th>
+                  <th className="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
+                    Slug
+                  </th>
+                  <th className="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
+                    Products
+                  </th>
+                  <th className="text-right text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
+                    Actions
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-stone-100">
+                {categories.map((category) => (
+                  <tr key={category.id} className="hover:bg-stone-50">
+                    <td className="px-6 py-4">
+                      <p className="text-sm font-medium text-stone-900">
+                        {category.name}
+                      </p>
+                      {category.description && (
+                        <p className="text-xs text-stone-400 mt-0.5">
+                          {category.description}
+                        </p>
+                      )}
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className="text-sm text-stone-500">
+                        {category.slug}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className="text-sm text-stone-500">
+                        {category._count?.products ?? 0}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center justify-end gap-2">
+                        <button
+                          onClick={() => startEdit(category)}
+                          className="p-1.5 text-stone-400 hover:text-stone-600 transition-colors"
+                        >
+                          <Pencil size={16} />
+                        </button>
+                        <button
+                          onClick={() => deleteCategory(category.id)}
+                          className="p-1.5 text-stone-400 hover:text-red-500 transition-colors"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

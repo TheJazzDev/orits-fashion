@@ -77,10 +77,10 @@ export default function AdminReviewsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 md:mb-8">
         <div>
-          <h1 className="text-2xl font-semibold text-stone-900">Reviews</h1>
-          <p className="text-stone-500 text-sm mt-1">
+          <h1 className="text-xl md:text-2xl font-semibold text-stone-900">Reviews</h1>
+          <p className="text-stone-500 text-xs md:text-sm mt-1">
             Moderate client reviews
           </p>
         </div>
@@ -89,10 +89,10 @@ export default function AdminReviewsPage() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-3 py-1.5 text-xs uppercase tracking-wider transition-colors ${
+              className={`px-3 py-1.5 text-xs uppercase tracking-wider transition-colors active:opacity-80 ${
                 filter === f
                   ? "bg-stone-900 text-white"
-                  : "bg-stone-100 text-stone-500 hover:bg-stone-200"
+                  : "bg-stone-100 text-stone-500"
               }`}
             >
               {f}
@@ -104,7 +104,7 @@ export default function AdminReviewsPage() {
       </div>
 
       {loading ? (
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           {[1, 2, 3].map((i) => (
             <div
               key={i}
@@ -113,62 +113,62 @@ export default function AdminReviewsPage() {
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <div className="text-center py-20 bg-white border border-stone-200">
-          <h3 className="text-lg font-medium text-stone-900 mb-2">
+        <div className="text-center py-16 md:py-20 bg-white border border-stone-200">
+          <h3 className="text-base md:text-lg font-medium text-stone-900 mb-2">
             No reviews found
           </h3>
-          <p className="text-stone-500 text-sm">
+          <p className="text-stone-500 text-xs md:text-sm">
             {filter === "pending"
               ? "No pending reviews to moderate."
               : "Reviews will appear here when clients submit them."}
           </p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-3">
           {filtered.map((review) => (
             <div
               key={review.id}
-              className={`bg-white border p-6 ${
+              className={`bg-white border p-3 md:p-6 ${
                 !review.approved
                   ? "border-amber-200 bg-amber-50/30"
                   : "border-stone-200"
               }`}
             >
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
                     <span className="font-medium text-stone-900 text-sm">
                       {review.name}
                     </span>
-                    {review.email && (
-                      <span className="text-xs text-stone-400">
-                        {review.email}
-                      </span>
-                    )}
                     <div className="flex gap-0.5">
                       {Array.from({ length: review.rating }).map((_, i) => (
                         <Star
                           key={i}
-                          size={12}
+                          size={10}
                           className="text-gold-400 fill-gold-400"
                         />
                       ))}
                     </div>
                     {!review.approved && (
-                      <span className="text-xs px-2 py-0.5 bg-amber-100 text-amber-700">
+                      <span className="text-[10px] px-1.5 py-0.5 bg-amber-100 text-amber-700">
                         Pending
                       </span>
                     )}
                     {review.featured && (
-                      <span className="text-xs px-2 py-0.5 bg-gold-100 text-gold-700">
+                      <span className="text-[10px] px-1.5 py-0.5 bg-gold-100 text-gold-700">
                         Featured
                       </span>
                     )}
                   </div>
-                  <p className="text-stone-600 text-sm leading-relaxed">
+                  {review.email && (
+                    <p className="text-xs text-stone-400 mb-1.5">
+                      {review.email}
+                    </p>
+                  )}
+                  <p className="text-stone-600 text-xs md:text-sm leading-relaxed">
                     {review.content}
                   </p>
-                  <p className="text-xs text-stone-400 mt-2">
+                  <p className="text-[10px] md:text-xs text-stone-400 mt-2">
                     {new Date(review.createdAt).toLocaleDateString("en-NG", {
                       year: "numeric",
                       month: "long",
@@ -177,16 +177,16 @@ export default function AdminReviewsPage() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-1 shrink-0">
+                <div className="flex items-center gap-1 shrink-0 self-end sm:self-start">
                   {!review.approved && (
                     <button
                       onClick={() =>
                         updateReview(review.id, { approved: true })
                       }
-                      className="p-1.5 text-emerald-500 hover:bg-emerald-50 transition-colors rounded"
+                      className="p-2 text-emerald-500 active:bg-emerald-50 transition-colors rounded"
                       title="Approve"
                     >
-                      <Check size={16} />
+                      <Check size={18} />
                     </button>
                   )}
                   {review.approved && (
@@ -194,10 +194,10 @@ export default function AdminReviewsPage() {
                       onClick={() =>
                         updateReview(review.id, { approved: false })
                       }
-                      className="p-1.5 text-amber-500 hover:bg-amber-50 transition-colors rounded"
+                      className="p-2 text-amber-500 active:bg-amber-50 transition-colors rounded"
                       title="Unapprove"
                     >
-                      <X size={16} />
+                      <X size={18} />
                     </button>
                   )}
                   <button
@@ -206,10 +206,10 @@ export default function AdminReviewsPage() {
                         featured: !review.featured,
                       })
                     }
-                    className={`p-1.5 transition-colors rounded ${
+                    className={`p-2 transition-colors rounded ${
                       review.featured
-                        ? "text-gold-500 hover:bg-gold-50"
-                        : "text-stone-300 hover:text-gold-500 hover:bg-gold-50"
+                        ? "text-gold-500"
+                        : "text-stone-300 active:text-gold-500"
                     }`}
                     title={
                       review.featured
@@ -218,16 +218,16 @@ export default function AdminReviewsPage() {
                     }
                   >
                     <Star
-                      size={16}
+                      size={18}
                       className={review.featured ? "fill-current" : ""}
                     />
                   </button>
                   <button
                     onClick={() => deleteReview(review.id)}
-                    className="p-1.5 text-stone-300 hover:text-red-500 transition-colors rounded"
+                    className="p-2 text-stone-300 active:text-red-500 transition-colors rounded"
                     title="Delete"
                   >
-                    <Trash2 size={16} />
+                    <Trash2 size={18} />
                   </button>
                 </div>
               </div>
