@@ -157,7 +157,7 @@ export default function AboutPage() {
             <div className="w-16 h-[1px] bg-gold-500 mx-auto mt-4 md:mt-6" />
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {values.map((value) => {
               const Icon = value.icon;
               return (

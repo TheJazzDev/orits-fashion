@@ -96,6 +96,15 @@ export default function Navbar() {
 
       {mobileOpen && (
         <div className="fixed inset-0 z-40 bg-white animate-fade-in md:hidden">
+          {/* Close button inside the overlay */}
+          <button
+            onClick={() => setMobileOpen(false)}
+            className="absolute top-4 right-4 p-2 text-stone-900 active:opacity-70"
+            aria-label="Close menu"
+          >
+            <X size={28} />
+          </button>
+
           <div className="flex flex-col items-center justify-center h-full gap-6">
             {navLinks.map((link) => (
               <Link

@@ -52,29 +52,35 @@ export default async function CatalogPage({
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-stone-900 via-neutral-800 to-stone-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="text-gold-400 tracking-[0.3em] uppercase text-xs font-medium">
+      <section className="pt-28 pb-14 md:pt-32 md:pb-20 bg-stone-950 text-white relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.5) 2px, rgba(255,255,255,0.5) 3px)`,
+          }}
+        />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="text-gold-400 tracking-[0.3em] uppercase text-[10px] sm:text-xs font-medium">
             Our Work
           </span>
-          <h1 className="font-heading text-5xl md:text-6xl mt-4 mb-6">
+          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-3 md:mt-4 mb-4 md:mb-6">
             Catalog
           </h1>
-          <div className="w-16 h-[1px] bg-gold-500 mx-auto mb-6" />
-          <p className="text-stone-300 text-lg max-w-2xl mx-auto">
+          <div className="w-12 sm:w-16 h-[1px] bg-gold-500 mx-auto mb-4 md:mb-6" />
+          <p className="text-stone-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
             Explore our curated collection of handcrafted garments and designs.
           </p>
         </div>
       </section>
 
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Category Filters */}
           {categories.length > 0 && (
-            <div className="flex flex-wrap gap-3 mb-12 justify-center">
+            <div className="flex flex-wrap gap-2 md:gap-3 mb-8 md:mb-12 justify-center">
               <Link
                 href="/catalog"
-                className={`px-5 py-2 text-xs tracking-[0.15em] uppercase border transition-colors ${
+                className={`px-4 md:px-5 py-1.5 md:py-2 text-[10px] sm:text-xs tracking-[0.15em] uppercase border transition-colors ${
                   !params.category
                     ? "bg-stone-900 text-white border-stone-900"
                     : "border-stone-300 text-stone-600 hover:border-stone-900 hover:text-stone-900"
@@ -86,7 +92,7 @@ export default async function CatalogPage({
                 <Link
                   key={cat.id}
                   href={`/catalog?category=${cat.slug}`}
-                  className={`px-5 py-2 text-xs tracking-[0.15em] uppercase border transition-colors ${
+                  className={`px-4 md:px-5 py-1.5 md:py-2 text-[10px] sm:text-xs tracking-[0.15em] uppercase border transition-colors ${
                     params.category === cat.slug
                       ? "bg-stone-900 text-white border-stone-900"
                       : "border-stone-300 text-stone-600 hover:border-stone-900 hover:text-stone-900"
@@ -100,14 +106,14 @@ export default async function CatalogPage({
 
           {/* Products Grid */}
           {products.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
               {products.map((product) => (
                 <Link
                   key={product.id}
                   href={`/catalog/${product.slug}`}
                   className="group"
                 >
-                  <div className="aspect-[3/4] relative overflow-hidden bg-stone-100 mb-4">
+                  <div className="aspect-[3/4] relative overflow-hidden bg-stone-100 mb-2 md:mb-4">
                     {product.images[0] ? (
                       <Image
                         src={product.images[0].url}
@@ -117,22 +123,22 @@ export default async function CatalogPage({
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-stone-200 to-stone-100">
-                        <span className="text-stone-400 text-sm">
-                          No Image
+                        <span className="font-heading text-stone-300 text-lg">
+                          O&apos;F
                         </span>
                       </div>
                     )}
                   </div>
                   {product.category && (
-                    <p className="text-xs text-gold-600 tracking-[0.15em] uppercase mb-1">
+                    <p className="text-[10px] sm:text-xs text-gold-600 tracking-[0.15em] uppercase mb-0.5 md:mb-1">
                       {product.category.name}
                     </p>
                   )}
-                  <h3 className="font-heading text-lg text-stone-900 group-hover:text-gold-700 transition-colors">
+                  <h3 className="font-heading text-sm sm:text-base md:text-lg text-stone-900 group-hover:text-gold-700 transition-colors">
                     {product.name}
                   </h3>
                   {product.price && (
-                    <p className="text-stone-500 text-sm mt-1">
+                    <p className="text-stone-500 text-xs sm:text-sm mt-0.5 md:mt-1">
                       {new Intl.NumberFormat("en-NG", {
                         style: "currency",
                         currency: "NGN",
@@ -143,25 +149,39 @@ export default async function CatalogPage({
               ))}
             </div>
           ) : (
-            <div className="text-center py-20">
-              <div className="w-20 h-20 mx-auto mb-6 border border-stone-200 flex items-center justify-center">
-                <span className="font-heading text-3xl text-stone-300">
+            /* Empty state — no "coming soon", just an honest invitation */
+            <div className="text-center py-16 md:py-24">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-5 md:mb-6 border border-stone-200 flex items-center justify-center">
+                <span className="font-heading text-2xl sm:text-3xl text-stone-300">
                   O&apos;F
                 </span>
               </div>
-              <h3 className="font-heading text-2xl text-stone-900 mb-3">
-                Collection Coming Soon
+              <h3 className="font-heading text-xl sm:text-2xl text-stone-900 mb-2 md:mb-3">
+                {params.category
+                  ? "No items in this category yet"
+                  : "Our collection is being prepared"}
               </h3>
-              <p className="text-stone-500 max-w-md mx-auto">
-                We&apos;re curating our finest pieces for you. Check back soon or
-                contact us for custom orders.
+              <p className="text-stone-500 text-sm sm:text-base max-w-md mx-auto">
+                {params.category
+                  ? "Try another category or browse all pieces below."
+                  : "We hand-craft every piece to order. Reach out and let us create something special for you."}
               </p>
-              <Link
-                href="/contact"
-                className="inline-block mt-8 px-8 py-3 bg-stone-900 text-white text-sm tracking-[0.15em] uppercase font-medium hover:bg-stone-800 transition-colors"
-              >
-                Request Custom Order
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6 md:mt-8">
+                {params.category && (
+                  <Link
+                    href="/catalog"
+                    className="inline-block px-6 md:px-8 py-3 border border-stone-300 text-stone-600 text-xs sm:text-sm tracking-[0.15em] uppercase font-medium hover:border-stone-900 hover:text-stone-900 transition-colors"
+                  >
+                    View All
+                  </Link>
+                )}
+                <Link
+                  href="/contact"
+                  className="inline-block px-6 md:px-8 py-3 bg-stone-900 text-white text-xs sm:text-sm tracking-[0.15em] uppercase font-medium hover:bg-stone-800 transition-colors"
+                >
+                  Request Custom Order
+                </Link>
+              </div>
             </div>
           )}
         </div>

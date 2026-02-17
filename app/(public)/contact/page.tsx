@@ -61,7 +61,7 @@ export default function ContactPage() {
                       Phone
                     </p>
                     <p className="text-stone-900 text-sm">
-                      +234 XXX XXX XXXX
+                      +234 707 275 1152
                     </p>
                   </div>
                 </div>

@@ -1,6 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
+import {
+  sendContactNotification,
+  sendContactConfirmation,
+} from "@/lib/email";
 
 export async function GET() {
   const session = await auth();
@@ -37,6 +41,20 @@ export async function POST(request: Request) {
         subject: body.subject || null,
         message: body.message,
       },
+    });
+
+    // Send emails in background — don't block the response
+    Promise.all([
+      sendContactNotification({
+        name: body.name,
+        email: body.email,
+        phone: body.phone || null,
+        subject: body.subject || null,
+        message: body.message,
+      }),
+      sendContactConfirmation({ name: body.name, email: body.email }),
+    ]).catch((err) => {
+      console.error("Email send error:", err);
     });
 
     return NextResponse.json(message, { status: 201 });

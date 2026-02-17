@@ -10,64 +10,75 @@ interface Product {
   category: { name: string } | null;
 }
 
+// Placeholder products shown when the database has no featured items yet.
+// Replace via the admin panel once real products are added.
+const PLACEHOLDER_PRODUCTS = [
+  {
+    id: "ph-1",
+    name: "Bespoke Evening Gown",
+    slug: "#",
+    price: 85000,
+    category: { name: "Women's Wear" },
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
+        alt: "Bespoke Evening Gown",
+      },
+    ],
+  },
+  {
+    id: "ph-2",
+    name: "Ankara Fusion Dress",
+    slug: "#",
+    price: 65000,
+    category: { name: "Women's Wear" },
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=80",
+        alt: "Ankara Fusion Dress",
+      },
+    ],
+  },
+  {
+    id: "ph-3",
+    name: "Classic Men's Senator",
+    slug: "#",
+    price: 55000,
+    category: { name: "Men's Wear" },
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=400&q=80",
+        alt: "Classic Men's Senator",
+      },
+    ],
+  },
+];
+
 export default function FeaturedProducts({
   products,
 }: {
   products: Product[];
 }) {
-  if (products.length === 0) {
-    return (
-      <section className="py-16 md:py-24 bg-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-16">
-            <span className="text-gold-500 tracking-[0.3em] uppercase text-xs font-medium">
-              Curated For You
-            </span>
-            <h2 className="font-heading text-3xl md:text-5xl text-stone-900 mt-3 md:mt-4">
-              Featured Pieces
-            </h2>
-            <div className="w-16 h-[1px] bg-gold-500 mx-auto mt-4 md:mt-6" />
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i}>
-                <div className="aspect-[3/4] bg-stone-200 mb-3 md:mb-4 flex items-center justify-center">
-                  <span className="text-stone-400 text-xs sm:text-sm tracking-wide">
-                    Coming Soon
-                  </span>
-                </div>
-                <div className="h-3 md:h-4 w-3/4 bg-stone-200 rounded mb-2" />
-                <div className="h-2 md:h-3 w-1/2 bg-stone-100 rounded" />
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-8 md:mt-12">
-            <p className="text-stone-500 text-sm">
-              Our featured collection is being curated. Check back soon!
-            </p>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const displayProducts =
+    products.length > 0
+      ? products
+      : (PLACEHOLDER_PRODUCTS as unknown as Product[]);
 
   return (
-    <section className="py-16 md:py-24 bg-cream">
+    <section className="py-12 md:py-20 lg:py-24 bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10 md:mb-16">
-          <span className="text-gold-500 tracking-[0.3em] uppercase text-xs font-medium">
+        <div className="text-center mb-8 md:mb-14 lg:mb-16">
+          <span className="text-gold-500 tracking-[0.3em] uppercase text-[10px] sm:text-xs font-medium">
             Curated For You
           </span>
-          <h2 className="font-heading text-3xl md:text-5xl text-stone-900 mt-3 md:mt-4">
+          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-stone-900 mt-3 md:mt-4">
             Featured Pieces
           </h2>
-          <div className="w-16 h-[1px] bg-gold-500 mx-auto mt-4 md:mt-6" />
+          <div className="w-12 sm:w-16 h-[1px] bg-gold-500 mx-auto mt-3 md:mt-6" />
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
-          {products.map((product) => (
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 lg:gap-8">
+          {displayProducts.map((product) => (
             <Link
               key={product.id}
               href={`/catalog/${product.slug}`}
@@ -92,7 +103,7 @@ export default function FeaturedProducts({
                   {product.category.name}
                 </p>
               )}
-              <h3 className="font-heading text-sm sm:text-base md:text-lg text-stone-900">
+              <h3 className="font-heading text-sm sm:text-base md:text-lg text-stone-900 group-hover:text-gold-700 transition-colors">
                 {product.name}
               </h3>
               {product.price && (
@@ -110,7 +121,7 @@ export default function FeaturedProducts({
         <div className="text-center mt-8 md:mt-12">
           <Link
             href="/catalog"
-            className="inline-block w-full sm:w-auto px-10 py-4 border border-stone-900 text-stone-900 text-sm tracking-[0.15em] uppercase font-medium text-center active:bg-stone-900 active:text-white transition-colors"
+            className="inline-block w-full sm:w-auto px-8 md:px-10 py-3.5 md:py-4 border border-stone-900 text-stone-900 text-xs sm:text-sm tracking-[0.15em] uppercase font-medium text-center active:bg-stone-900 active:text-white transition-colors"
           >
             View All
           </Link>
